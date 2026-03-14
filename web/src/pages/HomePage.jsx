@@ -1,7 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 import "./HomePage.css";
 
-function HomePage() {
+function HomePage({ user, isAdmin }) {
+  const navigate = useNavigate();
+
+
+  const role = user?.user_metadata?.role;
+  const name = user?.user_metadata?.name || "회원";
+  const storeName = user?.user_metadata?.store_name || "가게";
+
+  let welcomeText = "";
+
+  if (isAdmin) {
+    welcomeText = "관리자님 안녕하세요";
+  } else if (role === "owner") {
+    welcomeText = `${storeName} 사장님 안녕하세요`;
+  } else if (user) {
+    welcomeText = `${name}님 안녕하세요`;
+  }
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
+
   return (
     <div className="landing-page">
       <header className="landing-header">
@@ -12,12 +35,38 @@ function HomePage() {
           </div>
 
           <nav className="landing-nav">
-            <a href="#features">Features</a>
-            <a href="#report">Report</a>
-            <Link to="/login">Login</Link>
-            <Link to="/join" className="header-cta">
-              Get Started
-            </Link>
+            {!user ? (
+              <>
+                <a href="#features">Features</a>
+                <a href="#report">Report</a>
+                <Link to="/login">Login</Link>
+                <Link to="/join" className="header-cta">
+                  Get Started
+                </Link>
+              </>
+            ) : (
+              <div className="logged-in-nav">
+                <span className="welcome-text">{welcomeText}</span>
+
+                {isAdmin ? (
+                  <Link to="/admin" className="dashboard-link">
+                    관리자페이지
+                  </Link>
+                ) : (
+                  <Link to="/dashboard" className="dashboard-link">
+                    대시보드
+                  </Link>
+                )}
+
+                <button
+                  type="button"
+                  className="logout-btn"
+                  onClick={handleLogout}
+                >
+                  로그아웃
+                </button>
+              </div>
+            )}
           </nav>
         </div>
       </header>
@@ -40,10 +89,30 @@ function HomePage() {
               </p>
 
               <div className="hero-actions">
-                <Link to="/join" className="primary-btn">
-                  무료로 시작하기
-                </Link>
-                <button className="secondary-btn">데모 보기</button>
+                {!user ? (
+                  <>
+                    <Link to="/join" className="primary-btn">
+                      무료로 시작하기
+                    </Link>
+                    <button className="secondary-btn">데모 보기</button>
+                  </>
+                ) : isAdmin ? (
+                  <>
+                    <Link to="/admin" className="primary-btn">
+                      관리자페이지로 이동
+                    </Link>
+                    <Link to="/dashboard" className="secondary-btn">
+                      사용자 대시보드
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/dashboard" className="primary-btn">
+                      대시보드로 이동
+                    </Link>
+                    <button className="secondary-btn">데모 보기</button>
+                  </>
+                )}
               </div>
             </div>
 
@@ -260,10 +329,30 @@ function HomePage() {
               </p>
 
               <div className="cta-actions">
-                <Link to="/join" className="white-btn">
-                  2주 무료 체험 시작하기
-                </Link>
-                <button className="ghost-btn">가격 플랜 확인</button>
+                {!user ? (
+                  <>
+                    <Link to="/join" className="white-btn">
+                      2주 무료 체험 시작하기
+                    </Link>
+                    <button className="ghost-btn">가격 플랜 확인</button>
+                  </>
+                ) : isAdmin ? (
+                  <>
+                    <Link to="/admin" className="white-btn">
+                      관리자페이지 이동
+                    </Link>
+                    <Link to="/dashboard" className="ghost-btn">
+                      사용자 대시보드
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/dashboard" className="white-btn">
+                      대시보드 바로가기
+                    </Link>
+                    <button className="ghost-btn">가격 플랜 확인</button>
+                  </>
+                )}
               </div>
             </div>
           </div>
