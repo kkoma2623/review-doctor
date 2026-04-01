@@ -75,6 +75,7 @@ npm run dev
 ```
 
 기본적으로 Vite 개발 서버를 사용하며, `/api` 요청은 `http://127.0.0.1:8000`으로 프록시되도록 설정되어 있습니다.
+프론트 파일을 저장하면 HMR로 즉시 반영되고, polling 기반 watch도 켜져 있어 변경 감지가 더 안정적으로 동작합니다.
 
 ## 프론트 환경 변수
 
@@ -93,6 +94,13 @@ VITE_SUPABASE_ANON_KEY=...
 cd web
 npm run lint
 npm run build
+```
+
+배포용 파일을 수정할 때마다 다시 만들고 싶다면 아래 watch 스크립트도 사용할 수 있습니다.
+
+```bash
+cd web
+npm run build:watch
 ```
 
 ## 현재 포함된 화면

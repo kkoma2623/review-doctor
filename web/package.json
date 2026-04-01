@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
+    "build:watch": "vite build --watch",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --host 0.0.0.0",
+    "typecheck": "tsc -b",
+    "typecheck:watch": "tsc -b --watch --preserveWatchOutput"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.1",

@@ -36,10 +36,29 @@ npm install
 npm run dev
 ```
 
+`npm run dev`는 Vite 개발 서버를 띄우며, 프론트 파일을 저장하면 즉시 다시 반영됩니다.  
+HMR(Hot Module Replacement)과 polling watch 설정이 켜져 있어 수정 내용을 브라우저에서 바로 확인할 수 있습니다.
+
 ## 프로덕션 빌드
 
 ```bash
 npm run build
+```
+
+## 파일 변경 시 자동 재빌드
+
+브라우저에서 바로 보면서 개발할 때는 보통 `npm run dev`만 쓰면 됩니다.
+
+배포용 `dist` 파일도 수정할 때마다 다시 만들고 싶다면:
+
+```bash
+npm run build:watch
+```
+
+타입 검사만 계속 돌리고 싶다면:
+
+```bash
+npm run typecheck:watch
 ```
 
 ## 린트
