@@ -87,9 +87,9 @@ export function MarketingHero({ user, isAdmin }: MarketingActionProps) {
         <Div className="marketing-hero__copy">
           <Pill tone="info">NEW · AI Review Intelligence</Pill>
           <H1 className="marketing-hero__title">
-            사장님의 운영 고민을
-            <Span className="marketing-hero__title-accent">리뷰 데이터 중심</Span>
-            으로 바꿉니다
+            <Span className="marketing-hero__title-line">사장님의 운영 고민을</Span>
+            <Span className="marketing-hero__title-accent-line">리뷰 데이터</Span>
+            <Span className="marketing-hero__title-line">중심으로 바꿉니다</Span>
           </H1>
           <P className="marketing-hero__description">
             네이버, 배민, 쿠팡이츠, 구글 리뷰를 한곳에 모아 AI가 감정 분석, 키워드
