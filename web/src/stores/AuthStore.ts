@@ -1,6 +1,10 @@
 import type { User } from "@supabase/supabase-js";
 import { makeAutoObservable, runInAction } from "mobx";
-import { supabase } from "../lib/supabase";
+import {
+  isSupabaseConfigured,
+  supabase,
+  supabaseConfigMessage,
+} from "../lib/supabase";
 import type { SignupFormValues } from "../types/auth";
 import type { RootStore } from "./RootStore";
 
@@ -11,6 +15,14 @@ export class AuthStore {
 
   constructor(private readonly rootStore: RootStore) {
     makeAutoObservable(this, {}, { autoBind: true });
+  }
+
+  get isAuthConfigured(): boolean {
+    return isSupabaseConfigured;
+  }
+
+  get authUnavailableMessage(): string {
+    return supabaseConfigMessage;
   }
 
   get isAuthenticated(): boolean {
@@ -63,6 +75,14 @@ export class AuthStore {
   }
 
   async initialize(): Promise<void> {
+    if (!supabase) {
+      runInAction(() => {
+        this.user = null;
+        this.authLoading = false;
+      });
+      return;
+    }
+
     await this.loadCurrentUser();
 
     if (this.authUnsubscribe) {
@@ -92,6 +112,10 @@ export class AuthStore {
     email: string,
     password: string,
   ): Promise<{ success: boolean; message?: string; user?: User | null }> {
+    if (!supabase) {
+      return { success: false, message: supabaseConfigMessage };
+    }
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email.trim().toLowerCase(),
       password,
@@ -109,6 +133,10 @@ export class AuthStore {
   }
 
   async signUp(values: SignupFormValues): Promise<{ success: boolean; message?: string }> {
+    if (!supabase) {
+      return { success: false, message: supabaseConfigMessage };
+    }
+
     const { error } = await supabase.auth.signUp({
       email: values.email.trim().toLowerCase(),
       password: values.password,
@@ -132,6 +160,10 @@ export class AuthStore {
   }
 
   async updatePassword(password: string): Promise<{ success: boolean; message?: string }> {
+    if (!supabase) {
+      return { success: false, message: supabaseConfigMessage };
+    }
+
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
@@ -142,7 +174,9 @@ export class AuthStore {
   }
 
   async signOut(): Promise<void> {
-    await supabase.auth.signOut();
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
 
     runInAction(() => {
       this.user = null;
@@ -150,6 +184,14 @@ export class AuthStore {
   }
 
   private async loadCurrentUser(): Promise<void> {
+    if (!supabase) {
+      runInAction(() => {
+        this.user = null;
+        this.authLoading = false;
+      });
+      return;
+    }
+
     try {
       const {
         data: { user },

@@ -112,6 +112,10 @@ const SignupPage = observer(() => {
       <H2 className="auth-card__title">회원가입</H2>
       <P className="auth-card__description">회원가입 정보를 입력해주세요.</P>
 
+      {!authStore.isAuthConfigured ? (
+        <Notice tone="error">{authStore.authUnavailableMessage}</Notice>
+      ) : null}
+
       <Form className="auth-form auth-form--spacious" onSubmit={handleSubmit}>
         <Div className="auth-form__section">
           <P className="auth-form__section-title">계정 정보</P>

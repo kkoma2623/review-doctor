@@ -60,6 +60,10 @@ const LoginPage = observer(() => {
       <H2 className="auth-card__title">로그인</H2>
       <P className="auth-card__description">Review Doctor를 시작하세요.</P>
 
+      {!authStore.isAuthConfigured ? (
+        <Notice tone="error">{authStore.authUnavailableMessage}</Notice>
+      ) : null}
+
       <Form className="auth-form" onSubmit={handleSubmit}>
         <FormField label="이메일">
           <FieldInput

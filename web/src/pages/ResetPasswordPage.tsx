@@ -62,6 +62,10 @@ function ResetPasswordPage() {
       <H2 className="auth-card__title">새 비밀번호 설정</H2>
       <P className="auth-card__description">새 비밀번호를 입력하면 로그인 화면으로 이동합니다.</P>
 
+      {!authStore.isAuthConfigured ? (
+        <Notice tone="error">{authStore.authUnavailableMessage}</Notice>
+      ) : null}
+
       <Form className="auth-form" onSubmit={handleSubmit}>
         <FormField label="새 비밀번호">
           <FieldInput
