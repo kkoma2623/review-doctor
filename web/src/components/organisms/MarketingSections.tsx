@@ -88,7 +88,7 @@ export function MarketingHero({ user, isAdmin }: MarketingActionProps) {
           <Pill tone="info">NEW · AI Review Intelligence</Pill>
           <H1 className="marketing-hero__title">
             사장님의 운영 고민을
-            <Span className="marketing-hero__title-accent"> 리뷰 데이터 중심</Span>
+            <Span className="marketing-hero__title-accent">리뷰 데이터 중심</Span>
             으로 바꿉니다
           </H1>
           <P className="marketing-hero__description">

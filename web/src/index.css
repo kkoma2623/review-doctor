@@ -58,6 +58,9 @@ body {
     radial-gradient(circle at top right, rgba(8, 183, 154, 0.08), transparent 22%),
     var(--bg-light);
   color: var(--text-strong);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-break: strict;
 }
 
 a {
@@ -68,6 +71,18 @@ a {
 button,
 input {
   font: inherit;
+}
+
+:where(h1, h2, h3, h4) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+:where(p, li, label, td, th, .ui-notice, .ui-pill) {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 .shell-container {
@@ -106,7 +121,9 @@ input {
     background-color 160ms ease,
     color 160ms ease;
   cursor: pointer;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .ui-button:hover,
@@ -366,6 +383,7 @@ input {
 .brand-lockup__copy {
   display: grid;
   gap: 2px;
+  min-width: 0;
 }
 
 .brand-lockup__title {
@@ -443,6 +461,7 @@ input {
   margin: 0;
   color: rgba(247, 251, 255, 0.74);
   font-size: 0.94rem;
+  text-wrap: pretty;
 }
 
 .marketing-hero {
@@ -467,11 +486,13 @@ input {
   font-size: clamp(3.2rem, 6vw, 5rem);
   line-height: 0.96;
   letter-spacing: -0.06em;
+  max-width: 11ch;
 }
 
 .marketing-hero__title-accent {
-  display: block;
-  margin-top: 10px;
+  display: inline;
+  margin-left: 0.22em;
+  margin-right: 0.18em;
   background: linear-gradient(135deg, #99deff, #63b5ff);
   -webkit-background-clip: text;
   color: transparent;
@@ -483,6 +504,7 @@ input {
   color: rgba(239, 246, 255, 0.78);
   font-size: 1.16rem;
   line-height: 1.8;
+  max-width: 34ch;
 }
 
 .marketing-hero__actions {
@@ -525,6 +547,7 @@ input {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
   padding: 14px 18px;
   border-radius: 18px;
   background: linear-gradient(135deg, #32b0ff, #0d7ce8);
@@ -532,6 +555,7 @@ input {
   box-shadow: 0 18px 36px rgba(13, 124, 232, 0.28);
   font-size: 0.92rem;
   font-weight: 700;
+  max-width: min(250px, calc(100% - 12px));
 }
 
 .marketing-preview__floating small {
@@ -711,6 +735,7 @@ input {
   margin: 0;
   color: var(--text-body);
   font-size: 1.02rem;
+  max-width: 60ch;
 }
 
 .feature-grid {
@@ -766,6 +791,7 @@ input {
   display: grid;
   gap: 18px;
   align-content: start;
+  min-width: 0;
 }
 
 .marketing-report__list {
@@ -962,6 +988,7 @@ input {
 .auth-card__description {
   margin: 0;
   color: var(--text-body);
+  max-width: 58ch;
 }
 
 .auth-form {
@@ -1063,6 +1090,7 @@ input {
 .dashboard-hero__copy p {
   margin: 0;
   color: var(--text-body);
+  max-width: 58ch;
 }
 
 .dashboard-hero__actions {
@@ -1201,6 +1229,7 @@ input {
 .console-panel__heading {
   display: grid;
   gap: 8px;
+  min-width: 0;
 }
 
 .console-stack {
@@ -1226,6 +1255,7 @@ input {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  min-width: 0;
 }
 
 .email-manager__create .ui-input {
@@ -1368,6 +1398,17 @@ input {
   .marketing-preview {
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  .marketing-hero__title {
+    max-width: none;
+    line-height: 1.02;
+  }
+
+  .marketing-hero__title-accent {
+    display: inline;
+    margin-left: 0.16em;
+    margin-right: 0.12em;
   }
 
   .email-manager__row,
