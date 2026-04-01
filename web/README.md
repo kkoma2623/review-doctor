@@ -1,16 +1,58 @@
-# React + Vite
+# Review Doctor Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+리뷰닥터 프론트엔드는 Vite 기반 React + TypeScript 프로젝트입니다.  
+상태 관리는 MobX를 사용하고, 컴포넌트 구조는 Atomic Design 기준으로 정리되어 있습니다.
 
-Currently, two official plugins are available:
+## 사용 기술
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript
+- Vite
+- MobX / mobx-react-lite
+- React Router
+- ESLint
 
-## React Compiler
+## 디렉터리 구조
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```text
+src
+├── components
+│   ├── atoms
+│   ├── molecules
+│   ├── organisms
+│   └── templates
+├── data
+├── lib
+├── pages
+├── stores
+├── types
+└── utils
+```
 
-## Expanding the ESLint configuration
+## 개발 서버 실행
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+## 프로덕션 빌드
+
+```bash
+npm run build
+```
+
+## 린트
+
+```bash
+npm run lint
+```
+
+## 필요한 환경 변수
+
+```bash
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...
+```
+
+로컬에서는 `web/.env.local`에 넣어 사용하는 것을 권장합니다.

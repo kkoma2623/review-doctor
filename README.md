@@ -1,68 +1,113 @@
-# 리뷰닥터 POC
+# 리뷰닥터
 
-가게 이름을 입력하면 네이버·구글·블로그 리뷰를 크롤링해  
-긍정/부정 비율, 강점·약점, 개선 제안을 자동 분석해주는 풀스택 웹 앱 POC입니다.
+리뷰닥터는 음식점/매장 리뷰를 모아 운영에 도움이 되는 인사이트를 제공하는 풀스택 웹 애플리케이션입니다.  
+현재 프론트엔드는 React + TypeScript + MobX + Atomic Design 구조로 정리되어 있고, 백엔드는 FastAPI 기반으로 구성되어 있습니다.
 
-## 데모 (배포)
-🔗 https://review-doctor-poc.vercel.app  
-(배포 후 실제 URL로 교체)
+## 현재 스택
 
-![메인 화면 예시]
+### Frontend
+- React 19
+- TypeScript
+- Vite
+- MobX / mobx-react-lite
+- React Router
+- Atomic Design
 
+### Backend
+- FastAPI
+- Python
+- requests / BeautifulSoup 기반 크롤링 로직
 
-## 주요 기능
-- 실시간 리뷰 크롤링 & 감성 분석
-- 강점/약점 키워드 추출
-- 실질적인 개선 제안 생성
-- 로딩/에러 처리 UI
+### Auth / External
+- Supabase Auth
 
-## 기술 스택
-**Frontend**  
-- React + Vite  
-- 상태 관리: useState  
+## 프론트 구조
 
-**Backend**  
-- FastAPI (Python)  
-- 크롤링: requests + BeautifulSoup4  
+`web/src`는 Atomic Design 기준으로 정리되어 있습니다.
 
-**배포**  
-- Vercel (Frontend + Serverless Python)
+```text
+web/src
+├── components
+│   ├── atoms
+│   ├── molecules
+│   ├── organisms
+│   └── templates
+├── data
+├── lib
+├── pages
+├── stores
+├── types
+└── utils
+```
 
-## 로컬 실행 방법 (가장 중요!)
+핵심 포인트:
+- HTML 태그 래퍼를 `atoms/html.tsx`에 두고 공통 atom 계층으로 사용
+- 화면 조립은 `molecules -> organisms -> templates -> pages` 순서로 구성
+- 전역 인증/관리자 상태는 MobX store로 관리
+- 라우팅과 접근 제어는 `web/src/App.tsx`에서 처리
 
-### 1. 프로젝트 구조 생성 (최초 1회만)
-프로젝트 폴더를 처음 만들거나 구조를 새로 잡을 때 아래 스크립트를 실행하세요.
-review-doctor-poc/
-├── api/                        # FastAPI 백엔드
-│   ├── main.py                 # FastAPI 앱 메인 파일
-│   ├── requirements.txt        # 필요한 pip 패키지 목록
-│   └── venv/                   # Python 가상환경 (자동 생성)
-│
-├── web/                        # Vite + React 프론트엔드
-│   ├── node_modules/           # npm 패키지 (git ignore)
-│   ├── public/                 # 정적 파일 (favicon 등)
-│   ├── src/                    # React 소스 코드
-│   │   ├── App.jsx             # 메인 컴포넌트 (입력창·버튼·결과 UI)
-│   │   ├── main.jsx            # 앱 진입점
-│   │   ├── index.css           # 전역 스타일
-│   │   └── assets/             # 이미지 등
-│   ├── vite.config.js          # Vite 설정 (proxy 포함)
-│   ├── package.json            # npm 의존성 & 스크립트
-│   ├── package-lock.json
-│   └── .gitignore
-│
-├── init-project.sh             # 구조 생성 스크립트
-├── run.sh                      # 서버 실행 스크립트
-├── .gitignore                  # git 무시 파일
-└── README.md                   # 이 파일
+## 주요 파일
 
-```bash
-chmod +x init-project.sh
-./init-project.sh
+- `web/src/App.tsx`: 라우트 구성 및 인증/관리자 접근 제어
+- `web/src/stores/AuthStore.ts`: 로그인, 회원가입, 비밀번호 변경, 인증 상태 관리
+- `web/src/stores/AdminStore.ts`: 관리자 이메일 목록 및 관리자 판별 로직
+- `web/src/components/atoms/html.tsx`: 기본 HTML atom 래퍼
+- `web/src/components/templates/*`: 화면 단위 템플릿
+- `web/src/pages/*`: 실제 페이지 진입 컴포넌트
 
-### 백엔드
+## 실행 방법
+
+### 1. 백엔드 실행
+
 ```bash
 cd api
-source venv/bin/activate  # Windows면 venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
+```
+
+### 2. 프론트엔드 실행
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+기본적으로 Vite 개발 서버를 사용하며, `/api` 요청은 `http://127.0.0.1:8000`으로 프록시되도록 설정되어 있습니다.
+
+## 프론트 환경 변수
+
+프론트 인증 기능을 사용하려면 `web` 디렉터리에서 아래 환경 변수가 필요합니다.
+
+```bash
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...
+```
+
+보통 `web/.env.local` 파일에 넣어 사용하면 됩니다.
+
+## 검증 커맨드
+
+```bash
+cd web
+npm run lint
+npm run build
+```
+
+## 현재 포함된 화면
+
+- 랜딩 페이지
+- 로그인
+- 회원가입
+- 가입 완료
+- 비밀번호 재설정
+- 사용자 대시보드
+- 관리자 대시보드
+- 관리자 회원 관리
+- 관리자 설정
+
+## 메모
+
+- 관리자 이메일 목록은 현재 브라우저 `localStorage` 기반으로 관리됩니다.
+- 관리자 전용 추가 메뉴(가게 관리, 분석 이력, 리포트)는 동일한 Atomic Design 구조 위에서 확장할 수 있도록 자리만 먼저 구성되어 있습니다.
