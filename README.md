@@ -1,68 +1,87 @@
-# 리뷰닥터 POC
+# 리뷰닥터 (Review Doctor) POC
 
-가게 이름을 입력하면 네이버·구글·블로그 리뷰를 크롤링해  
-긍정/부정 비율, 강점·약점, 개선 제안을 자동 분석해주는 풀스택 웹 앱 POC입니다.
+소상공인/카페/식당 리뷰를 수집하고,  
+감성분석 · 주제분류 · 임베딩 · 군집화 · 경쟁 매장 비교를 통해  
+**강점 / 약점 / 실행 가능한 개선 과제**를 도출하는 리뷰 분석 POC 프로젝트입니다.
 
-## 데모 (배포)
-🔗 https://review-doctor-poc.vercel.app  
-(배포 후 실제 URL로 교체)
+---
 
-![메인 화면 예시]
+## 1. 프로젝트 개요
 
+리뷰닥터는 네이버 플레이스 리뷰를 기반으로 아래와 같은 인사이트를 제공하는 것을 목표로 합니다.
 
-## 주요 기능
-- 실시간 리뷰 크롤링 & 감성 분석
-- 강점/약점 키워드 추출
-- 실질적인 개선 제안 생성
-- 로딩/에러 처리 UI
+- 리뷰 수집 및 정제
+- 긍정 / 부정 감성분석
+- 맛 / 서비스 / 분위기 / 가격 / 청결 / 재방문 등 주제 분류
+- 의미가 비슷한 리뷰 군집화
+- 대표 리뷰 및 핵심 키워드 추출
+- 경쟁 매장과 비교한 상대적 약점 분석
+- 실행형 개선 과제 도출
 
-## 기술 스택
-**Frontend**  
-- React + Vite  
-- 상태 관리: useState  
+단순히 리뷰를 요약하는 수준이 아니라,  
+**“사장님이 실제로 무엇을 바꿔야 하는지”**를 제안하는 방향으로 설계되었습니다.
 
-**Backend**  
-- FastAPI (Python)  
-- 크롤링: requests + BeautifulSoup4  
+---
 
-**배포**  
-- Vercel (Frontend + Serverless Python)
+## 2. 주요 기능
 
-## 로컬 실행 방법 (가장 중요!)
+### 2.1 내부 리뷰 분석
+- 네이버 플레이스 리뷰 URL을 입력받아 리뷰 수집
+- 감성분석 모델 기반 긍정/부정 분류
+- 리뷰 키워드 추출
+- 의미 기반 임베딩 생성
+- 유사 리뷰 군집화
+- 강점 군집 / 내부 보완 포인트 도출
 
-### 1. 프로젝트 구조 생성 (최초 1회만)
-프로젝트 폴더를 처음 만들거나 구조를 새로 잡을 때 아래 스크립트를 실행하세요.
+### 2.2 경쟁 매장 비교 분석
+- 내 매장 리뷰 URL + 경쟁 매장 리뷰 URL 입력
+- 각 매장을 동일 기준으로 분석
+- 주제별 언급 비율 비교
+- 경쟁 평균 대비 Gap 계산
+- 상대적 약점 기반 실행 과제 생성
+
+### 2.3 Streamlit 기반 분석 UI
+- 분석 단계 진행률 표시
+- 리뷰 분석 결과 시각화
+- 강점 / 약점 / 개선 과제 카드 UI 제공
+- 리뷰/군집/비교 데이터 테이블 제공
+
+---
+
+## 3. 기술 스택
+
+### Backend / Analysis
+- Python
+- Selenium
+- BeautifulSoup
+- Transformers
+- Sentence-Transformers
+- scikit-learn
+- Streamlit
+
+### Web / API (POC 전체 기준)
+- FastAPI
+- React
+- Vite
+
+---
+
+## 4. 프로젝트 구조
+
+예상 기준 구조는 아래와 같습니다.
+
+```bash
 review-doctor-poc/
-├── api/                        # FastAPI 백엔드
-│   ├── main.py                 # FastAPI 앱 메인 파일
-│   ├── requirements.txt        # 필요한 pip 패키지 목록
-│   └── venv/                   # Python 가상환경 (자동 생성)
-│
-├── web/                        # Vite + React 프론트엔드
-│   ├── node_modules/           # npm 패키지 (git ignore)
-│   ├── public/                 # 정적 파일 (favicon 등)
-│   ├── src/                    # React 소스 코드
-│   │   ├── App.jsx             # 메인 컴포넌트 (입력창·버튼·결과 UI)
-│   │   ├── main.jsx            # 앱 진입점
-│   │   ├── index.css           # 전역 스타일
-│   │   └── assets/             # 이미지 등
-│   ├── vite.config.js          # Vite 설정 (proxy 포함)
-│   ├── package.json            # npm 의존성 & 스크립트
-│   ├── package-lock.json
-│   └── .gitignore
-│
-├── init-project.sh             # 구조 생성 스크립트
-├── run.sh                      # 서버 실행 스크립트
-├── .gitignore                  # git 무시 파일
-└── README.md                   # 이 파일
-
-```bash
-chmod +x init-project.sh
-./init-project.sh
-
-### 백엔드
-```bash
-cd api
-source venv/bin/activate  # Windows면 venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+├── api/
+│   ├── app/
+│   │   └── test/
+│   │       ├── hf_sentiment_test.py       # Streamlit 기반 리뷰 분석 실행 UI
+│   │       └── pipeline_service.py        # 리뷰 분석 파이프라인 핵심 로직
+│   ├── venv/                              # Python 가상환경
+│   └── ...
+├── web/                                   # React + Vite 프론트엔드
+├── script/
+│   └── start-servers.sh                   # 서버 실행 스크립트
+├── src/lib/                               # 공용 라이브러리 또는 유틸
+├── README.md
+└── setup.sh
