@@ -1,12 +1,12 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/atoms/Button";
-import { FieldInput } from "../components/atoms/FieldInput";
-import { Notice } from "../components/atoms/Notice";
-import { Form, H2, P } from "../components/atoms/html";
-import { FormField } from "../components/molecules/FormField";
-import { AuthSplitTemplate } from "../components/templates/AuthSplitTemplate";
-import { useStore } from "../stores/useStore";
+import { Button } from "@/components/atoms/Button";
+import { FieldInput } from "@/components/atoms/FieldInput";
+import { Notice } from "@/components/atoms/Notice";
+import { Form, H2, P } from "@/components/atoms/html";
+import { FormField } from "@/components/molecules/FormField";
+import { AuthSplitTemplate } from "@/components/templates/AuthSplitTemplate";
+import { useStore } from "@/stores/useStore";
 
 function ResetPasswordPage() {
   const navigate = useNavigate();

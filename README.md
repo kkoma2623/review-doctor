@@ -27,6 +27,7 @@
 
 ```text
 web/src
+├── app
 ├── components
 │   ├── atoms
 │   ├── molecules
@@ -44,11 +45,14 @@ web/src
 - HTML 태그 래퍼를 `atoms/html.tsx`에 두고 공통 atom 계층으로 사용
 - 화면 조립은 `molecules -> organisms -> templates -> pages` 순서로 구성
 - 전역 인증/관리자 상태는 MobX store로 관리
-- 라우팅과 접근 제어는 `web/src/App.tsx`에서 처리
+- `pages/**/page.tsx` 폴더 구조를 자동으로 읽어 라우트를 생성
+- `/admin/**`, `/dashboard/**`, `/login`, `/join/**` 접근 제어는 라우터에서 경로 기준으로 처리
 
 ## 주요 파일
 
-- `web/src/App.tsx`: 라우트 구성 및 인증/관리자 접근 제어
+- `web/src/App.tsx`: 앱 라우터 진입점
+- `web/src/app/fileRoutes.tsx`: 파일 시스템 기반 라우트 자동 수집
+- `web/src/app/AppRouter.tsx`: 라우트 렌더링 및 접근 제어
 - `web/src/stores/AuthStore.ts`: 로그인, 회원가입, 비밀번호 변경, 인증 상태 관리
 - `web/src/stores/AdminStore.ts`: 관리자 이메일 목록 및 관리자 판별 로직
 - `web/src/components/atoms/html.tsx`: 기본 HTML atom 래퍼

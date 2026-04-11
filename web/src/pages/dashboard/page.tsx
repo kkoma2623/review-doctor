@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
-import { DashboardOverview } from "../components/organisms/DashboardSections";
-import { DashboardTemplate } from "../components/templates/DashboardTemplate";
-import { useStore } from "../stores/useStore";
+import { DashboardOverview } from "@/components/organisms/DashboardSections";
+import { DashboardTemplate } from "@/components/templates/DashboardTemplate";
+import { useStore } from "@/stores/useStore";
 
 const DashboardPage = observer(() => {
   const { authStore } = useStore();

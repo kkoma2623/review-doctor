@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { MarketingTemplate } from "../components/templates/MarketingTemplate";
-import { useStore } from "../stores/useStore";
+import { MarketingTemplate } from "@/components/templates/MarketingTemplate";
+import { useStore } from "@/stores/useStore";
 
 const HomePage = observer(() => {
   const { authStore } = useStore();

@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
-import { AdminEmailManager } from "../components/organisms/AdminSections";
-import { AdminConsoleTemplate } from "../components/templates/AdminConsoleTemplate";
-import { useStore } from "../stores/useStore";
+import { AdminEmailManager } from "@/components/organisms/AdminSections";
+import { AdminConsoleTemplate } from "@/components/templates/AdminConsoleTemplate";
+import { useStore } from "@/stores/useStore";
 
 const AdminSettingsPage = observer(() => {
   const { adminStore, authStore } = useStore();

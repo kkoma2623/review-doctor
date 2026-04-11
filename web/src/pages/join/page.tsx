@@ -1,16 +1,16 @@
 import { observer } from "mobx-react-lite";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppLink } from "../components/atoms/AppLink";
-import { Button } from "../components/atoms/Button";
-import { Checkbox } from "../components/atoms/Checkbox";
-import { FieldInput } from "../components/atoms/FieldInput";
-import { Notice } from "../components/atoms/Notice";
-import { Div, Form, H2, P, Span } from "../components/atoms/html";
-import { FormField } from "../components/molecules/FormField";
-import { AuthSplitTemplate } from "../components/templates/AuthSplitTemplate";
-import { useStore } from "../stores/useStore";
-import type { GenderOption } from "../types/auth";
+import { AppLink } from "@/components/atoms/AppLink";
+import { Button } from "@/components/atoms/Button";
+import { Checkbox } from "@/components/atoms/Checkbox";
+import { FieldInput } from "@/components/atoms/FieldInput";
+import { Notice } from "@/components/atoms/Notice";
+import { Div, Form, H2, P, Span } from "@/components/atoms/html";
+import { FormField } from "@/components/molecules/FormField";
+import { AuthSplitTemplate } from "@/components/templates/AuthSplitTemplate";
+import { useStore } from "@/stores/useStore";
+import type { GenderOption } from "@/types/auth";
 
 interface SignupFormState {
   name: string;

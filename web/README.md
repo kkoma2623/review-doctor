@@ -16,6 +16,7 @@
 
 ```text
 src
+├── app
 ├── components
 │   ├── atoms
 │   ├── molecules
@@ -28,6 +29,26 @@ src
 ├── types
 └── utils
 ```
+
+## 라우팅 구조
+
+`src/pages/**/page.tsx` 파일은 자동으로 라우트가 됩니다.
+
+예시:
+
+```text
+src/pages/index/page.tsx              -> /
+src/pages/login/page.tsx              -> /login
+src/pages/join/success/page.tsx       -> /join/success
+src/pages/admin/users/page.tsx        -> /admin/users
+```
+
+접근 제어는 경로 기준으로 자동 적용됩니다.
+
+- `/admin/**`: 관리자 전용
+- `/dashboard/**`: 로그인 사용자 전용
+- `/login`, `/join/**`: 비로그인 사용자 전용
+- 나머지: 공개 페이지
 
 ## 개발 서버 실행
 

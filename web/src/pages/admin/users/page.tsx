@@ -1,8 +1,8 @@
-import { Pill } from "../components/atoms/Pill";
-import { AdminMetricsGrid, PanelShell } from "../components/organisms/AdminSections";
-import { DataTable, type DataTableColumn } from "../components/molecules/DataTable";
-import { AdminConsoleTemplate } from "../components/templates/AdminConsoleTemplate";
-import { allAdminUsers, type AdminUserRow } from "../data/mockData";
+import { Pill } from "@/components/atoms/Pill";
+import { AdminMetricsGrid, PanelShell } from "@/components/organisms/AdminSections";
+import { DataTable, type DataTableColumn } from "@/components/molecules/DataTable";
+import { AdminConsoleTemplate } from "@/components/templates/AdminConsoleTemplate";
+import { allAdminUsers, type AdminUserRow } from "@/data/mockData";
 
 const columns: Array<DataTableColumn<AdminUserRow>> = [
   { key: "name", header: "이름", render: (row) => row.name },

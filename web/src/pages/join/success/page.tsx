@@ -1,7 +1,7 @@
-import { AppLink } from "../components/atoms/AppLink";
-import { Notice } from "../components/atoms/Notice";
-import { H2, P } from "../components/atoms/html";
-import { AuthSplitTemplate } from "../components/templates/AuthSplitTemplate";
+import { AppLink } from "@/components/atoms/AppLink";
+import { Notice } from "@/components/atoms/Notice";
+import { H2, P } from "@/components/atoms/html";
+import { AuthSplitTemplate } from "@/components/templates/AuthSplitTemplate";
 
 function JoinSuccessPage() {
   return (
