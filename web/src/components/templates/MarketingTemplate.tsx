@@ -9,6 +9,7 @@ import {
   PlatformStrip,
   ReportSection,
 } from "../organisms/MarketingSections";
+import styles from "./MarketingTemplate.module.css";
 
 interface MarketingTemplateProps {
   user: User | null;
@@ -24,7 +25,7 @@ export function MarketingTemplate({
   onLogout,
 }: MarketingTemplateProps) {
   return (
-    <Main className="marketing-page">
+    <Main className={styles.page}>
       <MarketingHeader
         user={user}
         isAdmin={isAdmin}

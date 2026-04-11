@@ -11,6 +11,8 @@ import { FormField } from "@/components/molecules/FormField";
 import { AuthSplitTemplate } from "@/components/templates/AuthSplitTemplate";
 import { useStore } from "@/stores/useStore";
 import type { GenderOption } from "@/types/auth";
+import { cx } from "@/utils/cx";
+import styles from "../auth/AuthForm.module.css";
 
 interface SignupFormState {
   name: string;
@@ -100,7 +102,7 @@ const SignupPage = observer(() => {
       title="회원 유형에 맞는 리뷰 운영 워크스페이스를 시작하세요"
       description="가입 화면도 atom과 molecule로 정리해 이후 입력 폼 확장이나 검증 규칙 추가가 쉬운 구조로 바꿨습니다."
       footer={
-        <P className="auth-footer-copy">
+        <P className={styles.footerCopy}>
           이미 계정이 있나요?{" "}
           <AppLink to="/login" tone="inline" size="sm">
             로그인
@@ -108,18 +110,18 @@ const SignupPage = observer(() => {
         </P>
       }
     >
-      <P className="auth-card__eyebrow">Membership Setup</P>
-      <H2 className="auth-card__title">회원가입</H2>
-      <P className="auth-card__description">회원가입 정보를 입력해주세요.</P>
+      <P className={styles.eyebrow}>Membership Setup</P>
+      <H2 className={styles.title}>회원가입</H2>
+      <P className={styles.description}>회원가입 정보를 입력해주세요.</P>
 
       {!authStore.isAuthConfigured ? (
         <Notice tone="error">{authStore.authUnavailableMessage}</Notice>
       ) : null}
 
-      <Form className="auth-form auth-form--spacious" onSubmit={handleSubmit}>
-        <Div className="auth-form__section">
-          <P className="auth-form__section-title">계정 정보</P>
-          <Div className="auth-form__grid">
+      <Form className={cx(styles.form, styles.formSpacious)} onSubmit={handleSubmit}>
+        <Div className={styles.section}>
+          <P className={styles.sectionTitle}>계정 정보</P>
+          <Div className={styles.grid}>
             <FormField label="이름">
               <FieldInput
                 type="text"
@@ -158,9 +160,9 @@ const SignupPage = observer(() => {
           </Div>
         </Div>
 
-        <Div className="auth-form__section">
-          <P className="auth-form__section-title">추가 정보</P>
-          <Div className="auth-form__grid">
+        <Div className={styles.section}>
+          <P className={styles.sectionTitle}>추가 정보</P>
+          <Div className={styles.grid}>
             <FormField label="생년월일 8자리" hint="예: 19900101">
               <FieldInput
                 type="text"
@@ -182,9 +184,9 @@ const SignupPage = observer(() => {
             </FormField>
           </Div>
 
-          <Div className="auth-choice-group">
-            <Span className="ui-field__label">성별</Span>
-            <Div className="auth-choice-group__buttons">
+          <Div className={styles.choiceGroup}>
+            <Span className={styles.choiceLabel}>성별</Span>
+            <Div className={styles.choiceButtons}>
               {[
                 { label: "남자", value: "male" },
                 { label: "여자", value: "female" },
@@ -203,16 +205,16 @@ const SignupPage = observer(() => {
           </Div>
         </Div>
 
-        <Div className="auth-form__section">
-          <P className="auth-form__section-title">가입 유형</P>
-          <Div className="auth-checkbox-row">
+        <Div className={styles.section}>
+          <P className={styles.sectionTitle}>가입 유형</P>
+          <Div className={styles.checkboxRow}>
             <Checkbox
               checked={form.isOwner}
               onChange={(event) => updateField("isOwner", event.target.checked)}
             />
             <P>사업주로 가입합니다</P>
           </Div>
-          <P className="auth-form__helper">
+          <P className={styles.helper}>
             사업주 계정은 가게 등록, 리뷰 분석 리포트, 대시보드 기능을 사용할 수 있습니다.
           </P>
 
@@ -230,7 +232,7 @@ const SignupPage = observer(() => {
 
         {message ? <Notice tone="error">{message}</Notice> : null}
 
-        <Div className="auth-form__actions">
+        <Div className={styles.actions}>
           <Button type="submit" tone="dark" stretch disabled={loading}>
             {loading ? "가입 중..." : "회원가입"}
           </Button>

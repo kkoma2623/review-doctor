@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Div, Label, P } from "../atoms/html";
+import styles from "./FormField.module.css";
 
 interface FormFieldProps {
   label: string;
@@ -9,10 +10,10 @@ interface FormFieldProps {
 
 export function FormField({ label, hint, children }: FormFieldProps) {
   return (
-    <Div className="ui-field">
-      <Label className="ui-field__label">{label}</Label>
+    <Div className={styles.field}>
+      <Label className={styles.label}>{label}</Label>
       {children}
-      {hint ? <P className="ui-field__hint">{hint}</P> : null}
+      {hint ? <P className={styles.hint}>{hint}</P> : null}
     </Div>
   );
 }

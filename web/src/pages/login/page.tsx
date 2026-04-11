@@ -9,6 +9,7 @@ import { Div, Form, H2, P } from "@/components/atoms/html";
 import { FormField } from "@/components/molecules/FormField";
 import { AuthSplitTemplate } from "@/components/templates/AuthSplitTemplate";
 import { useStore } from "@/stores/useStore";
+import styles from "../auth/AuthForm.module.css";
 
 const LoginPage = observer(() => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ const LoginPage = observer(() => {
       title="로그인과 동시에 매장 리뷰 흐름을 파악하세요"
       description="운영팀과 사업주가 같은 데이터 흐름을 보도록 인증 화면도 템플릿 기반으로 정리했습니다."
       footer={
-        <P className="auth-footer-copy">
+        <P className={styles.footerCopy}>
           계정이 없나요?{" "}
           <AppLink to="/join" tone="inline" size="sm">
             회원가입
@@ -56,15 +57,15 @@ const LoginPage = observer(() => {
         </P>
       }
     >
-      <P className="auth-card__eyebrow">Review Doctor Access</P>
-      <H2 className="auth-card__title">로그인</H2>
-      <P className="auth-card__description">Review Doctor를 시작하세요.</P>
+      <P className={styles.eyebrow}>Review Doctor Access</P>
+      <H2 className={styles.title}>로그인</H2>
+      <P className={styles.description}>Review Doctor를 시작하세요.</P>
 
       {!authStore.isAuthConfigured ? (
         <Notice tone="error">{authStore.authUnavailableMessage}</Notice>
       ) : null}
 
-      <Form className="auth-form" onSubmit={handleSubmit}>
+      <Form className={styles.form} onSubmit={handleSubmit}>
         <FormField label="이메일">
           <FieldInput
             type="email"
@@ -85,7 +86,7 @@ const LoginPage = observer(() => {
 
         {message ? <Notice tone="error">{message}</Notice> : null}
 
-        <Div className="auth-form__actions">
+        <Div className={styles.actions}>
           <Button type="submit" tone="dark" stretch disabled={loading}>
             {loading ? "로그인 중..." : "로그인"}
           </Button>

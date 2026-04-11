@@ -7,6 +7,7 @@ import { Form, H2, P } from "@/components/atoms/html";
 import { FormField } from "@/components/molecules/FormField";
 import { AuthSplitTemplate } from "@/components/templates/AuthSplitTemplate";
 import { useStore } from "@/stores/useStore";
+import styles from "../auth/AuthForm.module.css";
 
 function ResetPasswordPage() {
   const navigate = useNavigate();
@@ -58,15 +59,15 @@ function ResetPasswordPage() {
       title="보안을 유지하면서 빠르게 비밀번호를 재설정하세요"
       description="새 비밀번호 설정 화면도 동일한 입력 atom과 폼 molecule을 사용하도록 맞춰두었습니다."
     >
-      <P className="auth-card__eyebrow">Credential Update</P>
-      <H2 className="auth-card__title">새 비밀번호 설정</H2>
-      <P className="auth-card__description">새 비밀번호를 입력하면 로그인 화면으로 이동합니다.</P>
+      <P className={styles.eyebrow}>Credential Update</P>
+      <H2 className={styles.title}>새 비밀번호 설정</H2>
+      <P className={styles.description}>새 비밀번호를 입력하면 로그인 화면으로 이동합니다.</P>
 
       {!authStore.isAuthConfigured ? (
         <Notice tone="error">{authStore.authUnavailableMessage}</Notice>
       ) : null}
 
-      <Form className="auth-form" onSubmit={handleSubmit}>
+      <Form className={styles.form} onSubmit={handleSubmit}>
         <FormField label="새 비밀번호">
           <FieldInput
             type="password"

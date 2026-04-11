@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from "react";
 import { cx } from "../../utils/cx";
 import { Div } from "./html";
+import styles from "./Surface.module.css";
 
 type SurfaceTone = "default" | "glass" | "panel" | "accent" | "muted";
 
@@ -18,9 +19,9 @@ export function Surface({
   return (
     <Div
       className={cx(
-        "ui-surface",
-        `ui-surface--${tone}`,
-        padded && "ui-surface--padded",
+        styles.surface,
+        styles[tone],
+        padded && styles.padded,
         className,
       )}
       {...props}

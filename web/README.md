@@ -10,6 +10,7 @@
 - Vite
 - MobX / mobx-react-lite
 - React Router
+- CSS Modules / CSS Custom Properties
 - ESLint
 
 ## 디렉터리 구조
@@ -26,9 +27,24 @@ src
 ├── lib
 ├── pages
 ├── stores
+├── styles
 ├── types
 └── utils
 ```
+
+## 스타일 구조
+
+컴포넌트와 페이지 스타일은 기본적으로 해당 파일 옆의 `*.module.css`에서 관리합니다.
+전역 스타일은 최소화해서 `src/styles/global.css`가 `tokens.css`와 `reset.css`만 불러오도록 구성했습니다.
+
+```text
+src/styles
+├── tokens.css
+├── reset.css
+└── global.css
+```
+
+새 UI를 추가할 때는 재사용 가능한 것은 `components/*/*.module.css`, 라우트 전용 배치는 `pages/**/page.module.css`처럼 가까운 위치에 두는 것을 권장합니다.
 
 ## 라우팅 구조
 

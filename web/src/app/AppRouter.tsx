@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Div, P } from "@/components/atoms/html";
 import { useStore } from "@/stores/useStore";
+import styles from "./AppRouter.module.css";
 import { fileRoutes, type RouteAccess } from "./fileRoutes";
 
 interface RouteGateProps {
@@ -39,8 +40,8 @@ export const AppRouter = observer(() => {
 
   if (authStore.authLoading) {
     return (
-      <Div className="app-loading">
-        <P className="app-loading__label">Review Doctor를 불러오는 중입니다.</P>
+      <Div className={styles.loading}>
+        <P className={styles.loadingLabel}>Review Doctor를 불러오는 중입니다.</P>
       </Div>
     );
   }
@@ -67,8 +68,8 @@ export const AppRouter = observer(() => {
 
 function RouteLoading() {
   return (
-    <Div className="app-loading">
-      <P className="app-loading__label">페이지를 불러오는 중입니다.</P>
+    <Div className={styles.loading}>
+      <P className={styles.loadingLabel}>페이지를 불러오는 중입니다.</P>
     </Div>
   );
 }

@@ -12,6 +12,7 @@
 - MobX / mobx-react-lite
 - React Router
 - Atomic Design
+- CSS Modules / CSS Custom Properties
 
 ### Backend
 - FastAPI
@@ -37,6 +38,7 @@ web/src
 ├── lib
 ├── pages
 ├── stores
+├── styles
 ├── types
 └── utils
 ```
@@ -47,6 +49,8 @@ web/src
 - 전역 인증/관리자 상태는 MobX store로 관리
 - `pages/**/page.tsx` 폴더 구조를 자동으로 읽어 라우트를 생성
 - `/admin/**`, `/dashboard/**`, `/login`, `/join/**` 접근 제어는 라우터에서 경로 기준으로 처리
+- 스타일은 CSS Modules를 기본으로 사용하고, 전역 CSS는 토큰과 리셋만 관리
+- 디자인 토큰은 `styles/tokens.css`, 브라우저 기본값 정리는 `styles/reset.css`, 전역 진입점은 `styles/global.css`에 배치
 
 ## 주요 파일
 
@@ -58,6 +62,8 @@ web/src
 - `web/src/components/atoms/html.tsx`: 기본 HTML atom 래퍼
 - `web/src/components/templates/*`: 화면 단위 템플릿
 - `web/src/pages/*`: 실제 페이지 진입 컴포넌트
+- `web/src/**/*.module.css`: 컴포넌트/페이지 단위 스코프 스타일
+- `web/src/styles/*`: 디자인 토큰, 리셋, 전역 스타일 진입점
 
 ## 실행 방법
 

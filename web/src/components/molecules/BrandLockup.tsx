@@ -1,5 +1,7 @@
 import { AppLink } from "../atoms/AppLink";
 import { Div, P, Strong } from "../atoms/html";
+import { cx } from "../../utils/cx";
+import styles from "./BrandLockup.module.css";
 
 interface BrandLockupProps {
   subtitle?: string;
@@ -16,12 +18,12 @@ export function BrandLockup({
     <AppLink
       to={to}
       tone="inline"
-      className={inverse ? "brand-lockup brand-lockup--inverse" : "brand-lockup"}
+      className={cx(styles.brandLockup, inverse && styles.inverse)}
     >
-      <Div className="brand-lockup__icon">RD</Div>
-      <Div className="brand-lockup__copy">
-        <Strong className="brand-lockup__title">Review Doctor</Strong>
-        <P className="brand-lockup__subtitle">{subtitle}</P>
+      <Div className={styles.icon}>RD</Div>
+      <Div className={styles.copy}>
+        <Strong className={styles.title}>Review Doctor</Strong>
+        <P className={styles.subtitle}>{subtitle}</P>
       </Div>
     </AppLink>
   );

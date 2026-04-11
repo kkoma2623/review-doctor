@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { Div, Table, Tbody, Td, Th, Thead, Tr } from "../atoms/html";
+import { cx } from "../../utils/cx";
+import styles from "./DataTable.module.css";
 
 export interface DataTableColumn<T> {
   key: string;
@@ -22,14 +24,17 @@ export function DataTable<T>({
   emptyMessage = "표시할 데이터가 없습니다.",
 }: DataTableProps<T>) {
   return (
-    <Div className="data-table__scroll">
-      <Table className="data-table">
+    <Div className={styles.scroll}>
+      <Table className={styles.table}>
         <Thead>
           <Tr>
             {columns.map((column) => (
               <Th
                 key={column.key}
-                className={column.align ? `is-align-${column.align}` : undefined}
+                className={cx(
+                  column.align === "right" && styles.alignRight,
+                  column.align === "center" && styles.alignCenter,
+                )}
               >
                 {column.header}
               </Th>
@@ -43,7 +48,10 @@ export function DataTable<T>({
                 {columns.map((column) => (
                   <Td
                     key={column.key}
-                    className={column.align ? `is-align-${column.align}` : undefined}
+                    className={cx(
+                      column.align === "right" && styles.alignRight,
+                      column.align === "center" && styles.alignCenter,
+                    )}
                   >
                     {column.render(row)}
                   </Td>
@@ -52,7 +60,7 @@ export function DataTable<T>({
             ))
           ) : (
             <Tr>
-              <Td className="data-table__empty" colSpan={columns.length}>
+              <Td className={styles.empty} colSpan={columns.length}>
                 {emptyMessage}
               </Td>
             </Tr>

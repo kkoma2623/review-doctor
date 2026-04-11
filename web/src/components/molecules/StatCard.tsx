@@ -1,5 +1,6 @@
 import { Surface } from "../atoms/Surface";
 import { H3, P } from "../atoms/html";
+import styles from "./StatCard.module.css";
 
 interface StatCardProps {
   label: string;
@@ -9,10 +10,10 @@ interface StatCardProps {
 
 export function StatCard({ label, value, note }: StatCardProps) {
   return (
-    <Surface tone="panel" className="stat-card">
-      <P className="stat-card__label">{label}</P>
-      <H3 className="stat-card__value">{value}</H3>
-      <P className="stat-card__note">{note}</P>
+    <Surface tone="panel" className={styles.statCard}>
+      <P className={styles.label}>{label}</P>
+      <H3 className={styles.value}>{value}</H3>
+      <P className={styles.note}>{note}</P>
     </Surface>
   );
 }

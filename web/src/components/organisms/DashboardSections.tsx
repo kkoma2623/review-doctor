@@ -6,6 +6,7 @@ import { Pill } from "../atoms/Pill";
 import { Surface } from "../atoms/Surface";
 import { Div, H2, H3, Li, P, Strong, Ul } from "../atoms/html";
 import { StatCard } from "../molecules/StatCard";
+import styles from "./DashboardSections.module.css";
 
 interface DashboardOverviewProps {
   email: string;
@@ -24,8 +25,8 @@ export function DashboardOverview({
 }: DashboardOverviewProps) {
   return (
     <>
-      <Surface tone="accent" className="dashboard-hero">
-        <Div className="dashboard-hero__copy">
+      <Surface tone="accent" className={styles.hero}>
+        <Div className={styles.heroCopy}>
           <Pill tone="highlight">{roleLabel}</Pill>
           <H2>{storeName} 운영 상태를 한눈에 확인하세요</H2>
           <P>
@@ -33,7 +34,7 @@ export function DashboardOverview({
             우선순위를 함께 볼 수 있습니다.
           </P>
         </Div>
-        <Div className="dashboard-hero__actions">
+        <Div className={styles.heroActions}>
           <AppLink to="/" tone="dark" size="sm">
             서비스 홈
           </AppLink>
@@ -43,7 +44,7 @@ export function DashboardOverview({
         </Div>
       </Surface>
 
-      <Div className="dashboard-metric-grid">
+      <Div className={styles.metricGrid}>
         {dashboardMetrics.map((metric) => (
           <StatCard
             key={metric.label}
@@ -54,13 +55,13 @@ export function DashboardOverview({
         ))}
       </Div>
 
-      <Div className="dashboard-content-grid">
-        <Surface tone="panel" className="dashboard-panel">
-          <P className="dashboard-panel__eyebrow">이번 주 액션</P>
+      <Div className={styles.contentGrid}>
+        <Surface tone="panel" className={styles.panel}>
+          <P className={styles.panelEyebrow}>이번 주 액션</P>
           <H3>운영팀이 바로 실행할 수 있는 다음 단계</H3>
-          <Div className="dashboard-action-grid">
+          <Div className={styles.actionGrid}>
             {dashboardActionCards.map((card) => (
-              <Surface key={card.title} tone="muted" className="dashboard-action-card">
+              <Surface key={card.title} tone="muted" className={styles.actionCard}>
                 <H3>{card.title}</H3>
                 <P>{card.description}</P>
               </Surface>
@@ -79,15 +80,15 @@ export function DashboardOverview({
           )}
         </Surface>
 
-        <Surface tone="panel" className="dashboard-panel">
-          <P className="dashboard-panel__eyebrow">주간 흐름</P>
+        <Surface tone="panel" className={styles.panel}>
+          <P className={styles.panelEyebrow}>주간 흐름</P>
           <H3>리뷰 변화 포인트</H3>
-          <Ul className="dashboard-timeline">
+          <Ul className={styles.timeline}>
             {dashboardWeeklyTimeline.map((item) => (
               <Li key={item}>{item}</Li>
             ))}
           </Ul>
-          <Div className="dashboard-highlight">
+          <Div className={styles.highlight}>
             <Strong>다음 추천 작업</Strong>
             <P>배달 속도 관련 개선 공지를 노출하고, 가격 언급 리뷰에 대한 응답 템플릿을 준비하세요.</P>
           </Div>

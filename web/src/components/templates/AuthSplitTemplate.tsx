@@ -5,6 +5,8 @@ import { Pill } from "../atoms/Pill";
 import { Surface } from "../atoms/Surface";
 import { Div, H1, Li, Main, P, Ul } from "../atoms/html";
 import { BrandLockup } from "../molecules/BrandLockup";
+import { cx } from "../../utils/cx";
+import styles from "./AuthSplitTemplate.module.css";
 
 interface AuthSplitTemplateProps {
   eyebrow: string;
@@ -22,14 +24,14 @@ export function AuthSplitTemplate({
   footer,
 }: AuthSplitTemplateProps) {
   return (
-    <Main className="auth-template">
-      <Div className="auth-template__panel auth-template__panel--feature">
-        <Div className="auth-feature-panel">
+    <Main className={styles.template}>
+      <Div className={cx(styles.panel, styles.featurePanel)}>
+        <Div className={styles.featureContent}>
           <BrandLockup subtitle="Store Intelligence Platform" />
           <Pill tone="highlight">{eyebrow}</Pill>
           <H1>{title}</H1>
           <P>{description}</P>
-          <Ul className="auth-feature-panel__list">
+          <Ul className={styles.featureList}>
             {authFeatureBullets.map((item) => (
               <Li key={item}>{item}</Li>
             ))}
@@ -40,10 +42,10 @@ export function AuthSplitTemplate({
         </Div>
       </Div>
 
-      <Div className="auth-template__panel auth-template__panel--form">
-        <Surface tone="panel" className="auth-panel-card">
+      <Div className={cx(styles.panel, styles.formPanel)}>
+        <Surface tone="panel" className={styles.panelCard}>
           {children}
-          {footer ? <Div className="auth-panel-card__footer">{footer}</Div> : null}
+          {footer ? <Div className={styles.panelCardFooter}>{footer}</Div> : null}
         </Surface>
       </Div>
     </Main>

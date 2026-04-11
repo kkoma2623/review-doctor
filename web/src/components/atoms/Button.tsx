@@ -1,6 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cx } from "../../utils/cx";
 import { ButtonBase } from "./html";
+import styles from "./Button.module.css";
 
 type ButtonTone = "primary" | "secondary" | "ghost" | "dark" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
@@ -23,10 +24,10 @@ export function Button({
     <ButtonBase
       type={type}
       className={cx(
-        "ui-button",
-        `ui-button--${tone}`,
-        `ui-button--${size}`,
-        stretch && "ui-button--stretch",
+        styles.button,
+        styles[tone],
+        styles[size],
+        stretch && styles.stretch,
         className,
       )}
       {...props}

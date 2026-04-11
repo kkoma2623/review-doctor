@@ -4,6 +4,7 @@ import { adminMenuItems } from "../../data/mockData";
 import { AppLink } from "../atoms/AppLink";
 import { Aside, Div, H1, Main, Nav, P } from "../atoms/html";
 import { BrandLockup } from "../molecules/BrandLockup";
+import styles from "./AdminConsoleTemplate.module.css";
 
 interface AdminConsoleTemplateProps {
   title: string;
@@ -19,10 +20,10 @@ export function AdminConsoleTemplate({
   const location = useLocation();
 
   return (
-    <Main className="console-template">
-      <Aside className="console-sidebar">
+    <Main className={styles.template}>
+      <Aside className={styles.sidebar}>
         <BrandLockup subtitle="Admin Console" inverse />
-        <Nav className="console-sidebar__nav">
+        <Nav className={styles.sidebarNav}>
           {adminMenuItems.map((item) => (
             <AppLink
               key={item.path}
@@ -36,8 +37,8 @@ export function AdminConsoleTemplate({
         </Nav>
       </Aside>
 
-      <Div className="console-main">
-        <Div className="console-topbar">
+      <Div className={styles.main}>
+        <Div className={styles.topbar}>
           <Div>
             <H1>{title}</H1>
             <P>{description}</P>
@@ -46,7 +47,7 @@ export function AdminConsoleTemplate({
             서비스 홈
           </AppLink>
         </Div>
-        <Div className="console-content">{children}</Div>
+        <Div className={styles.content}>{children}</Div>
       </Div>
     </Main>
   );

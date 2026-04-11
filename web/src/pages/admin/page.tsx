@@ -9,6 +9,7 @@ import {
   type AdminUserRow,
   type AnalysisJobRow,
 } from "@/data/mockData";
+import styles from "./page.module.css";
 
 const userColumns: Array<DataTableColumn<AdminUserRow>> = [
   { key: "name", header: "이름", render: (row) => row.name },
@@ -37,7 +38,7 @@ function AdminDashboardPage() {
     >
       <AdminMetricsGrid />
 
-      <Div className="console-two-column">
+      <Div className={styles.twoColumn}>
         <PanelShell title="최근 가입자" description="최근 가입된 사용자 흐름을 빠르게 확인하세요.">
           <DataTable
             columns={userColumns}

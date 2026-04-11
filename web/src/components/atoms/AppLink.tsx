@@ -2,6 +2,7 @@ import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import { cx } from "../../utils/cx";
 import { A } from "./html";
+import styles from "./AppLink.module.css";
 
 type LinkTone = "primary" | "secondary" | "ghost" | "inline" | "nav" | "dark";
 type LinkSize = "sm" | "md" | "lg";
@@ -28,33 +29,25 @@ type AnchorAppLinkProps = SharedAppLinkProps &
 export function AppLink(props: RouterAppLinkProps | AnchorAppLinkProps) {
   const { tone = "primary", size = "md", stretch = false, className, children } = props;
   const classes = cx(
-    "ui-link",
-    `ui-link--${tone}`,
-    `ui-link--${size}`,
-    stretch && "ui-link--stretch",
+    styles.link,
+    styles[tone],
+    styles[size],
+    stretch && styles.stretch,
     className,
   );
 
   if ("to" in props) {
     const {
-      to,
-      replace,
-      state,
-      relative,
-      preventScrollReset,
-      viewTransition,
+      tone: _tone,
+      size: _size,
+      stretch: _stretch,
+      className: _className,
+      children: _children,
+      ...linkProps
     } = props as RouterAppLinkProps;
 
     return (
-      <Link
-        className={classes}
-        to={to}
-        replace={replace}
-        state={state}
-        relative={relative}
-        preventScrollReset={preventScrollReset}
-        viewTransition={viewTransition}
-      >
+      <Link className={classes} {...linkProps}>
         {children}
       </Link>
     );
